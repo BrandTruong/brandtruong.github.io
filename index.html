@@ -26,28 +26,78 @@
     <meta name="msapplication-config" content="/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
     <!--styles and scripts-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://fonts.google.com/specimen/Poppins">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="/js/scaler.js"></script>
 </head>
 
 <body>
     <section>
-    <div class="card">
-        <div class="header">
-            <img class="circle_pic" src="images/headshot.jpg">
-            <h1> Brandon Truong</h1>
-            <p>UCLA 2023, Illustrator &amp; Developer</p>
-            <hr class="line">
-        </div>
-        <div class="footer">
-            <button class="resume" onclick="window.location.href='https://BrandTruong.github.io';">view resume</button>
-            <div class="socials">
-                <span>test</span>
-                <span>test</span>
-                <span>test</span>
-                <span>test</span>
+        <div class="card" id="scalee">
+            <div class="header">
+                <img class="circle_pic" src="images/headshot.jpg">
+                <h1> Brandon Truong</h1>
+                <p>UCLA 2023, Illustrator &amp; Developer</p>
+                <hr class="line">
             </div>
-        </div>
-    </div>      
+            <!--halfpoint-->
+            <div class="footer">
+                <a href="https://brandtruong.github.io/TruongBrandon.pdf">
+                    <button class="resume">view resume</button>
+                </a>
+                <div class="contacts">
+                    <a class="fa fa-envelope" href="mailto: btruong100381+p@gmail.com"></a>
+                    <a class="fa fa-linkedin-square" href="https://www.linkedin.com/in/brandtruong/"></a>
+                    <a class="fa fa-github" href="https://github.com/BrandTruong"></a>
+                    <a class="fa fa-instagram" href="https://www.instagram.com/acmstudio.ucla/"></a>
+                </div>
+            </div>
+        </div>  
     </section>
+    <script>
+        $(document).ready(function() {
+            //wip
+            var scale = 1;
+            var cWidth = $(window).width();
+            var cHeight = $(window).height();
+            var scaleeH = $("#scalee").height();
+            var scaleeW = $("#scalee").width();
+            var pWidth = (cWidth - scaleeW)/scaleeW;
+            var pHeight = (cHeight -scaleeH)/scaleeH;
+            if(cWidth < scaleeW) {
+                pWidth*=-1;
+            }
+            if(cHeight < scaleeH) {
+                pHeight*=-1;
+            }
+            var percent = (1 + Math.min(pWidth, pHeight))*.8;
+            $("#scalee").css({
+                        transform: "scale(" + percent + ")"
+            });
+            /* WIP
+            $(window).on('resize', function(){
+                var maxWidth = $(window).width();
+                var maxHeight = $(window).height();
+                var scaleeH = scale * $("#scalee").height();
+                var scaleeW = scale * $("#scalee").width();
+                
+                console.log(maxWidth+"*"+maxHeight+", "+scaleeW+"*"+scaleeH);
+                if(maxHeight < scaleeH || maxWidth < scaleeW) {
+                    scale-=0.2;
+                    $("#scalee").css({
+                        transform: "scale(" + scale + ")"
+                    });
+                } else if(maxHeight > scaleeH || maxWidth > scaleeW) {
+                    scale+=0.2;
+                    $("#scalee").css({
+                        transform: "scale(" + scale + ")"
+                    });
+                }
+            }).trigger('resize');
+            */
+        })(jQuery);
+    </script>
 </body>
